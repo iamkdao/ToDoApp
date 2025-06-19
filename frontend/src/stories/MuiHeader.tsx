@@ -34,7 +34,13 @@ export default function MenuAppBar({
     const theme = useTheme()
     const [auth, setAuth] = React.useState(true);
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const today = new Date().toLocaleDateString();
+    const options: Intl.DateTimeFormatOptions = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+
+    }
+    const today = new Date().toLocaleDateString(undefined, options);
 
     return (
         <Box sx={{ flexGrow: 1 }}>
