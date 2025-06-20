@@ -38,7 +38,7 @@ export const lightTheme: Theme = createTheme({
         background: {
             default: '#f5f5f5',
             paper: '#ffffff',
-            search: grey[700],
+            search: grey[400],
         },
         text: {
             primary: 'rgba(0, 0, 0, 0.87)',

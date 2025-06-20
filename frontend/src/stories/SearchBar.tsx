@@ -20,9 +20,9 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: theme.palette.mode == 'light' ? alpha(theme.palette.background.search, 0.4) : alpha(theme.palette.background.search, 0.2),
+    backgroundColor: theme.palette.mode == 'light' ? alpha(theme.palette.background.search, 0.6) : alpha(theme.palette.background.search, 0.2),
     '&:hover': {
-        backgroundColor: theme.palette.mode == 'light' ? alpha(theme.palette.background.search, 0.6) : alpha(theme.palette.background.search, 0.4),
+        backgroundColor: theme.palette.mode == 'light' ? alpha(theme.palette.background.search, 0.9) : alpha(theme.palette.background.search, 0.4),
     },
     marginRight: theme.spacing(2),
     marginLeft: 0,
