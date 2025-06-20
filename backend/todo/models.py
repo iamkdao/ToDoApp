@@ -14,8 +14,14 @@ class Todo(models.Model):
     description = models.TextField()
     date = models.DateTimeField()
     completed = models.BooleanField(default=False)
-    tags = models.ManyToManyField(Tag)
+    tags = models.ManyToManyField(Tag, through='TodoTag', blank=True)
     
     def __str__(self):
         return self.title
     
+class TodoTag(models.Model):
+    todo = models.ForeignKey(Todo, on_delete=models.CASCADE)
+    tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('todo', 'tag')

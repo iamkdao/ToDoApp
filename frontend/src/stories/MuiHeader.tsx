@@ -25,7 +25,7 @@ interface HeaderProps {
     handleDrawerOpen?: () => void;
 };
 
-export default function MenuAppBar({
+export default function MuiHeader({
     user,
     handleProfileOpen,
     handleProfileClose,
