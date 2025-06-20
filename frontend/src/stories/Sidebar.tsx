@@ -18,6 +18,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import { openSidebar, closeSidebar, toggleSidebar } from '../redux/sidebarSlice';
 
 import { lightBlue } from '@mui/material/colors';
 
@@ -93,6 +94,9 @@ export default function Sidebar() {
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
+            <IconButton onClick={handleDrawerOpen}>
+                {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            </IconButton>
             <Drawer
                 sx={{
                     width: drawerWidth,
@@ -104,7 +108,7 @@ export default function Sidebar() {
                 }}
                 variant="persistent"
                 anchor="left"
-                open={true}
+                open={open}
             >
                 <DrawerHeader>
                     <IconButton onClick={handleDrawerClose}>
