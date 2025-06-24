@@ -22,56 +22,61 @@ const InfoCard: React.FC<TaskCardProps> = ({ name, description, dateCreated, onD
     const formattedDate = dayjs(dateCreated).format('MMMM D, YYYY [at] h:mm A');
 
     return (
-        <Box sx={{
-            // minWidth: 275,
-            m: 2,
-        }}>
-            <Card variant="outlined"
-                sx={{
-                    width: '100%',
-                    boxSizing: 'border-box',
-                    maxWidth: window.innerWidth / 3,
-                    maxHeight: window.innerHeight / 2,
-                    display: 'flex',
-                    flexDirection: 'column'
-                }}
-            >
-                <CardContent >
-                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                        Created on {formattedDate}
+        <Card variant="outlined"
+            sx={{
+                width: '100%',
+                boxSizing: 'border-box',
+                height: '300px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+            }}
+        >
+            <CardContent sx={{ flex: 1, overflow: 'hidden' }}>
+                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                    Created on {formattedDate}
+                </Typography>
+                <Typography variant="h5" component="div">
+                    {name}
+                </Typography>
+                <Box sx={{
+                    overflow: 'auto',
+                    height: '80%',
+                    '&::-webkit-scrollbar': {
+                        width: '8px',
+                    },
+                    '&::-webkit-scrollbar-track': {
+                        background: '#f1f1f1',
+                    },
+                    '&::-webkit-scrollbar-thumb': {
+                        background: '#888',
+                        borderRadius: '4px',
+                    },
+                    '&::-webkit-scrollbar-thumb:hover': {
+                        background: '#555',
+                    }
+                }}>
+                    <Typography variant="body2">
+                        {description}
                     </Typography>
-                    <Typography variant="h5" component="div">
-                        {name}
-                    </Typography>
-                    <Box sx={{
-                        // flex: 1,
-                        overflow: 'auto',
-                        height: '70px',
-                    }}>
-                        <Typography variant="body2">
-                            {description}
-                        </Typography>
-                    </Box>
-                </CardContent>
-                <CardActions
-                    sx={{
-                        display: 'flex',
-                    }}
+                </Box>
+            </CardContent>
+
+            <CardActions>
+                <Box sx={{ flexGrow: 1 }}>
+                    <Tag />
+                </Box>
+                <Button
+                    size="small"
+                    color="error"
+                    startIcon={<DeleteIcon />}
+                    onClick={onDelete}
                 >
-                    <Box sx={{ flexGrow: 1 }}>  {/* Takes up all available space, pushing button right */}
-                        <Tag />
-                    </Box>
-                    <Button
-                        size="small"
-                        color="error"
-                        startIcon={<DeleteIcon />}
-                        onClick={onDelete}
-                    >
-                        Delete
-                    </Button>
-                </CardActions>
-            </Card>
-        </Box>
+                    Delete
+                </Button>
+            </CardActions>
+        </Card>
+
     );
 };
 

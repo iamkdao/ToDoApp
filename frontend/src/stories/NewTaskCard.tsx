@@ -15,16 +15,15 @@ import TaskCard from './TaskCard';
 const InfoCard = () => {
     const theme = useTheme()
     return (
-        <Box sx={{ m: 2 }}>
+        <Box>
             <Card variant="outlined" sx={{
                 width: '100%',
-                maxWidth: window.innerWidth / 3,
-                minHeight: window.innerHeight / 2,
+                height: '300px',
                 backgroundColor: 'transparent',
                 border: '2px dashed',
                 borderColor: theme.palette.background.search,
                 boxSizing: 'border-box',
-                p: '2',
+                // p: '2',
                 '&:hover': {
                     border: '2px solid',
                     borderColor: theme.palette.background.search,

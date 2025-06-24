@@ -13,6 +13,8 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { useTheme } from '@mui/material';
 import MuiButton from './MuiButton';
+import { mapDispatchToProps, mapStateToProps } from './connectors/headerConnectors'
+import { connect } from 'react-redux';
 
 type User = {
     name: string;
@@ -25,15 +27,10 @@ interface HeaderProps {
     handleDrawerOpen?: () => void;
 };
 
-export default function MuiHeader({
-    user,
-    handleProfileOpen,
-    handleProfileClose,
-    handleDrawerOpen
-}: HeaderProps) {
+function MuiHeader({
+    openSidebar, closeSidebar, toggleSidebar, isOpen
+}) {
     const theme = useTheme()
-    const [auth, setAuth] = React.useState(true);
-    const [anchorEl, setAnchorEl] = React.useState(null);
     const options: Intl.DateTimeFormatOptions = {
         year: 'numeric',
         month: 'long',
@@ -61,7 +58,7 @@ export default function MuiHeader({
                         color="inherit"
                         aria-label="menu"
                         sx={{ mr: 2 }}
-                        onClick={handleDrawerOpen}
+                        onClick={openSidebar}
                     >
                         <MenuIcon />
                     </IconButton>
@@ -75,40 +72,41 @@ export default function MuiHeader({
 
                     <MuiButton label='Add Tasks' theme={theme} sx={{ mr: 1 }} />
 
-                    {auth && (
-                        <div>
-                            <IconButton
-                                size="large"
-                                aria-label="account of current user"
-                                aria-controls="menu-appbar"
-                                aria-haspopup="true"
-                                onClick={handleProfileOpen}
-                                color="inherit"
-                            >
-                                <AccountCircle />
-                            </IconButton>
-                            <Menu
-                                id="menu-appbar"
-                                anchorEl={anchorEl}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                open={Boolean(anchorEl)}
-                                onClose={handleProfileClose}
-                            >
-                                <MenuItem onClick={handleProfileClose}>Profile</MenuItem>
-                                <MenuItem onClick={handleProfileClose}>My account</MenuItem>
-                            </Menu>
-                        </div>
-                    )}
+                    {/* {auth && ( */}
+                    <div>
+                        <IconButton
+                            size="large"
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            color="inherit"
+                        >
+                            <AccountCircle />
+                        </IconButton>
+                        {/* <Menu
+                            id="menu-appbar"
+                            anchorEl={anchorEl}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            open={Boolean(anchorEl)}
+                            onClose={handleProfileClose}
+                        >
+                            <MenuItem onClick={handleProfileClose}>Profile</MenuItem>
+                            <MenuItem onClick={handleProfileClose}>My account</MenuItem>
+                        </Menu> */}
+                    </div>
+                    {/* )} */}
                 </Toolbar>
             </AppBar>
         </Box>
     );
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(MuiHeader)

@@ -18,7 +18,9 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import { openSidebar, closeSidebar, toggleSidebar } from '../redux/sidebarSlice';
+// import { openSidebar, closeSidebar, toggleSidebar } from '../redux/sidebarSlice';
+import { connect } from 'react-redux';
+import { mapDispatchToProps, mapStateToProps } from './connectors/sidebarConnectors';
 
 import { lightBlue } from '@mui/material/colors';
 
@@ -79,24 +81,15 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     justifyContent: 'flex-end',
 }));
 
-export default function Sidebar() {
+function Sidebar({ openSidebar, closeSidebar, toggleSidebar, isOpen }) {
     const theme = useTheme();
-    const [open, setOpen] = React.useState(false);
-
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
-
-    const handleDrawerClose = () => {
-        setOpen(false);
-    };
 
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
-            <IconButton onClick={handleDrawerOpen}>
+            {/* <IconButton onClick={openSidebar}>
                 {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-            </IconButton>
+            </IconButton> */}
             <Drawer
                 sx={{
                     width: drawerWidth,
@@ -108,10 +101,10 @@ export default function Sidebar() {
                 }}
                 variant="persistent"
                 anchor="left"
-                open={open}
+                open={isOpen}
             >
                 <DrawerHeader>
-                    <IconButton onClick={handleDrawerClose}>
+                    <IconButton onClick={closeSidebar}>
                         {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
                     </IconButton>
                 </DrawerHeader>
@@ -140,3 +133,5 @@ export default function Sidebar() {
         </Box>
     );
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar)
